@@ -18,12 +18,12 @@ class App extends Component {
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/trago"} className="nav-link">
-                Trago
+                Lista de tragos
               </Link>
             </li>
             <li className="nav-item">
               <Link to={"/add"} className="nav-link">
-                Add
+                Agregar
               </Link>
             </li>
           </div>

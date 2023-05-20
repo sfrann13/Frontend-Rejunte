@@ -6,6 +6,9 @@ export default class AddTrago extends Component {
     super(props);
     this.onChangeNombre = this.onChangeNombre.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeDisponible = this.onChangeDisponible.bind(this);
+    this.onChangeIngredientes = this.onChangeIngredientes.bind(this);
+    this.onChangePreparacion = this.onChangePreparacion.bind(this);
     this.saveTrago = this.saveTrago.bind(this);
     this.newTrago = this.newTrago.bind(this);
 
@@ -31,10 +34,31 @@ export default class AddTrago extends Component {
     });
   }
 
+  onChangeIngredientes(e) {
+    this.setState({
+      ingredientes: e.target.value
+    });
+  }
+
+  onChangePreparacion(e) {
+    this.setState({
+      preparacion: e.target.value
+    });
+  }
+
+  onChangeDisponible(e) {
+    this.setState({
+      disponible: e.target.checked
+    });
+  }
+
   saveTrago() {
     var data = {
       nombre: this.state.nombre,
-      description: this.state.description
+      description: this.state.description,
+      preparacion: this.state.preparacion,
+      ingredientes: this.state.ingredientes,
+      disponible: this.state.disponible
     };
 
     TragoDataService.create(data)
@@ -43,9 +67,10 @@ export default class AddTrago extends Component {
           id: response.data.id,
           nombre: response.data.nombre,
           description: response.data.description,
-          published: response.data.published,
+          disponible: response.data.disponible,
+          ingredientes: response.data.ingredientes,
+          preparacion: response.data.preparacion,
 
-          submitted: true
         });
         console.log(response.data);
       })
@@ -70,9 +95,9 @@ export default class AddTrago extends Component {
       <div className="submit-form">
         {this.state.submitted ? (
           <div>
-            <h4>You submitted successfully!</h4>
+            <h4>Agregado correctamente!</h4>
             <button className="btn btn-success" onClick={this.newTrago}>
-              Add
+              Agregar trago
             </button>
           </div>
         ) : (
@@ -91,7 +116,7 @@ export default class AddTrago extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Description</label>
+              <label htmlFor="description">Descripcion</label>
               <input
                 type="text"
                 className="form-control"
@@ -100,6 +125,45 @@ export default class AddTrago extends Component {
                 value={this.state.description}
                 onChange={this.onChangeDescription}
                 name="description"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="ingredientes">Ingredientes</label>
+              <input
+                type="text"
+                className="form-control"
+                id="ingredientes"
+                required
+                value={this.state.ingredientes}
+                onChange={this.onChangeIngredientes}
+                name="ingredientes"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="preparacion">Preparacion</label>
+              <input
+                type="text"
+                className="form-control"
+                id="preparacion"
+                required
+                value={this.state.preparacion}
+                onChange={this.onChangePreparacion}
+                name="preparacion"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="disponible">Disponible</label>
+              <input
+                type="checkbox"
+                className="form-control"
+                id="disponible"
+                required
+                value={this.state.disponible}
+                onChange={this.onChangeDisponible}
+                name="disponible"
               />
             </div>
 

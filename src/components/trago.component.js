@@ -7,12 +7,15 @@ class Trago extends Component {
     super(props);
     this.onChangeNombre = this.onChangeNombre.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeDisponible = this.onChangeDisponible.bind(this);
+    this.onChangeIngredientes = this.onChangeIngredientes.bind(this);
+    this.onChangePreparacion = this.onChangePreparacion.bind(this);
     this.getTrago = this.getTrago.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
+    //this.updateDisponible = this.updateDisponible.bind(this);
     this.updateTrago = this.updateTrago.bind(this);
     this.deleteTrago = this.deleteTrago.bind(this);
 
-    this.state = {
+    this. state = {
       currentTrago: {
         nombre: "",
         description: "", 
@@ -29,8 +32,8 @@ class Trago extends Component {
   }
 
   onChangeNombre(e) {
+    
     const nombre = e.target.value;
-
     this.setState(function(prevState) {
       return {
         currentTrago: {
@@ -41,16 +44,109 @@ class Trago extends Component {
     });
   }
 
-  onChangeDescription(e) {
-    const description = e.target.value;
-    
-    this.setState(prevState => ({
-      currentTrago: {
-        ...prevState.currentTrago,
-        description: description
-      }
-    }));
+  onChangeIngredientes(e) {
+    if (e.target != undefined){
+      const ingredientes = e.target.value;
+
+      
+          this.setState(function(prevState) {
+            return {
+              currentTrago: {
+                ...prevState.currentTrago,
+                ingredientes: ingredientes
+              }
+            };
+          });
+    }
   }
+
+  onChangePreparacion(e) {
+    
+    if (e.target != undefined){
+      const preparacion = e.target.value;
+
+      this.setState(function(prevState) {
+        return {
+          currentTrago: {
+            ...prevState.currentTrago,
+            preparacion: preparacion
+          }
+        };
+      });
+    }
+  }
+
+  onChangeDisponible(e) {
+    if (e.target != undefined){
+
+      const disponible = e.target.checked;
+  
+      this.setState(function(prevState) {
+        return {
+          currentTrago: {
+            ...prevState.currentTrago,
+            disponible: disponible
+          }
+        };
+      });
+    }
+  }
+
+  onChangeDescription(e) {
+    if (e.target != undefined){
+
+      const description = e.target.value;
+      
+      this.setState(prevState => ({
+        currentTrago: {
+          ...prevState.currentTrago,
+          description: description
+        }
+      }));
+    }
+  }
+  // onChangeIngredientes(e) {
+  //   if (e.target != undefined){
+      
+  //     const ingredientes = e.target.value;
+      
+  //     this.setState(prevState => ({
+  //       currentTrago: {
+  //         ...prevState.currentTrago,
+  //         ingredientes: ingredientes
+  //       }
+  //     }));
+  //   }
+
+  // }
+  // onChangePreparacion(e) {
+  //   if (e.target != undefined){
+
+  //     const preparacion = e.target.value;
+      
+  //     this.setState(prevState => ({
+  //       currentTrago: {
+  //         ...prevState.currentTrago,
+  //         preparacion: preparacion
+  //       }
+  //     }));
+  //   }
+  // }
+  // onChangeDisponible(e) {
+  //   if (e.target != undefined){
+      
+  //     const disponible =e.target.value;
+      
+  //     this.setState(prevState => ({
+  //       currentTrago: {
+  //         ...prevState.currentTrago,
+  //         disponible: disponible
+  //       }
+  //     }));
+  //   }
+  // }
+
+  
 
   getTrago(id) {
     TragoDataService.get(id)
@@ -65,28 +161,26 @@ class Trago extends Component {
       });
   }
 
-  updatePublished(disponible) {
-    var data = {
-      id: this.state.currentTrago.id,
-      nombre: this.state.currentTrago.nombre,
-      description: this.state.currentTrago.description,
-      disponible: disponible
-    };
+  // updateDisponible(disponible) {
+  //   var data = {
+  //     id: this.state.currentTrago.id,
+  //     disponible: disponible
+  //   };
 
-    TragoDataService.update(this.state.currentTrago.id, data)
-      .then(response => {
-        this.setState(prevState => ({
-          currentTrago: {
-            ...prevState.currentTrago,
-            disponible: disponible
-          }
-        }));
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+  //   TragoDataService.update(this.state.currentTrago.id, data)
+  //     .then(response => {
+  //       this.setState(prevState => ({
+  //         currentTrago: {
+  //           ...prevState.currentTrago,
+  //           disponible: disponible
+  //         }
+  //       }));
+  //       console.log(response.data);
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // }
 
   updateTrago() {
     TragoDataService.update(
@@ -96,7 +190,7 @@ class Trago extends Component {
       .then(response => {
         console.log(response.data);
         this.setState({
-          message: "The trago was updated successfully!"
+          message: "Trago actualizado!"
         });
       })
       .catch(e => {
@@ -108,7 +202,7 @@ class Trago extends Component {
     TragoDataService.delete(this.state.currentTrago.id)
       .then(response => {
         console.log(response.data);
-        this.props.router.navigate('/tragos');
+        this.props.router.navigate('/trago');
       })
       .catch(e => {
         console.log(e);
@@ -144,36 +238,45 @@ class Trago extends Component {
                   onChange={this.onChangeDescription}
                 />
               </div>
-
               <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
-                {currentTrago.published ? "Published" : "Pending"}
+                <label htmlFor="ingredientes">Ingredientes</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="ingredientes"
+                  value={currentTrago.ingredientes}
+                  onChange={this.onChangeIngredientes}
+
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="preparacion">Preparacion</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="preparacion"
+                  value={currentTrago.preparacion}
+                  onChange={this.onChangePreparacion}
+
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="disponible">Disponible</label>
+                <input
+                  type="checkbox"
+                  className="form-control"
+                  id="disponible"
+                  value={currentTrago.disponible}
+                  onChange={this.onChangeDisponible}
+                />
               </div>
             </form>
-
-            {currentTrago.published ? (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(false)}
-              >
-                UnPublish
-              </button>
-            ) : (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(true)}
-              >
-                Publish
-              </button>
-            )}
 
             <button
               className="badge badge-danger mr-2"
               onClick={this.deleteTrago}
             >
-              Delete
+              Borrar
             </button>
 
             <button
@@ -181,14 +284,14 @@ class Trago extends Component {
               className="badge badge-success"
               onClick={this.updateTrago}
             >
-              Update
+              Actualizar
             </button>
             <p>{this.state.message}</p>
           </div>
         ) : (
           <div>
             <br />
-            <p>Please click on a Trago...</p>
+            <p>Seleccione un Trago...</p>
           </div>
         )}
       </div>

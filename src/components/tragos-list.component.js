@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 export default class TragosList extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
+    this.onChangeSearchNombre = this.onChangeSearchNombre.bind(this);
     this.retrieveTragos = this.retrieveTragos.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveTrago = this.setActiveTrago.bind(this);
     this.removeAllTragos = this.removeAllTragos.bind(this);
-    this.searchTitle = this.searchTitle.bind(this);
+    this.searchNombre = this.searchNombre.bind(this);
 
     this.state = {
       tragos: [],
       currentTrago: null,
       currentIndex: -1,
-      searchTitle: ""
+      searchNombre: ""
     };
   }
 
@@ -24,11 +24,11 @@ export default class TragosList extends Component {
     this.retrieveTragos();
   }
 
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
+  onChangeSearchNombre(e) {
+    const searchNombre = e.target.value;
 
     this.setState({
-      searchTitle: searchTitle
+      searchNombre: searchNombre
     });
   }
 
@@ -71,13 +71,13 @@ export default class TragosList extends Component {
       });
   }
 
-  searchTitle() {
+  searchNombre() {
     this.setState({
       currentTrago: null,
       currentIndex: -1
     });
 
-    TragoDataService.findByTitle(this.state.searchTitle)
+    TragoDataService.findByNombre(this.state.searchNombre)
       .then(response => {
         this.setState({
           tragos: response.data
@@ -90,7 +90,7 @@ export default class TragosList extends Component {
   }
 
   render() {
-    const { searchTitle, tragos, currentTrago, currentIndex } = this.state;
+    const { searchNombre, tragos, currentTrago, currentIndex } = this.state;
 
     return (
       <div className="list row">
@@ -99,23 +99,23 @@ export default class TragosList extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Search by nombre"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
+              placeholder="Buscar por nombre"
+              value={searchNombre}
+              onChange={this.onChangeSearchNombre}
             />
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchTitle}
+                onClick={this.searchNombre}
               >
-                Search
+                Buscar
               </button>
             </div>
           </div>
         </div>
         <div className="col-md-6">
-          <h4>Tragos List</h4>
+          <h4>Lista de tragos</h4>
 
           <ul className="list-group">
             {tragos &&
@@ -133,12 +133,12 @@ export default class TragosList extends Component {
               ))}
           </ul>
 
-          <button
+          {/* <button
             className="m-3 btn btn-sm btn-danger"
             onClick={this.removeAllTragos}
           >
-            Remove All
-          </button>
+            Eliminar todos
+          </button> */}
         </div>
         <div className="col-md-6">
           {currentTrago ? (
@@ -152,9 +152,21 @@ export default class TragosList extends Component {
               </div>
               <div>
                 <label>
-                  <strong>Description:</strong>
+                  <strong>Descripcion:</strong>
                 </label>{" "}
                 {currentTrago.description}
+              </div>
+              <div>
+                <label>
+                  <strong>Ingredientes:</strong>
+                </label>{" "}
+                {currentTrago.ingredientes}
+              </div>
+              <div>
+                <label>
+                  <strong>Preparacion:</strong>
+                </label>{" "}
+                {currentTrago.preparacion}
               </div>
               <div>
                 <label>
@@ -167,13 +179,13 @@ export default class TragosList extends Component {
                 to={"/trago/" + currentTrago.id}
                 className="badge badge-warning"
               >
-                Edit
+                Editar
               </Link>
             </div>
           ) : (
             <div>
               <br />
-              <p>Please click on a Trago...</p>
+              <p>Seleccione un trago para modificar...</p>
             </div>
           )}
         </div>

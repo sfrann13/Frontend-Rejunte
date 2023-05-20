@@ -25,8 +25,8 @@ class TragoDataService {
     return http.delete(`/trago`);
   }
 
-  findByTitle(title) {
-    return http.get(`/trago?nombre=${title}`);
+  findByNombre(nombre) {
+    return http.get(`/trago?nombre=${nombre}`);
   }
 }
 
