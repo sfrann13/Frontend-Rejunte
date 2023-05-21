@@ -15,7 +15,7 @@ class Trago extends Component {
     this.updateTrago = this.updateTrago.bind(this);
     this.deleteTrago = this.deleteTrago.bind(this);
 
-    this. state = {
+    this.state = {
       currentTrago: {
         nombre: "",
         description: "", 
@@ -45,7 +45,7 @@ class Trago extends Component {
   }
 
   onChangeIngredientes(e) {
-    if (e.target != undefined){
+    if (e.target !== undefined){
       const ingredientes = e.target.value;
 
       
@@ -62,7 +62,7 @@ class Trago extends Component {
 
   onChangePreparacion(e) {
     
-    if (e.target != undefined){
+    if (e.target !== undefined){
       const preparacion = e.target.value;
 
       this.setState(function(prevState) {
@@ -77,7 +77,7 @@ class Trago extends Component {
   }
 
   onChangeDisponible(e) {
-    if (e.target != undefined){
+    if (e.target !== undefined){
 
       const disponible = e.target.checked;
   
@@ -93,7 +93,7 @@ class Trago extends Component {
   }
 
   onChangeDescription(e) {
-    if (e.target != undefined){
+    if (e.target !== undefined){
 
       const description = e.target.value;
       
@@ -216,10 +216,10 @@ class Trago extends Component {
       <div>
         {currentTrago ? (
           <div className="edit-form">
-            <h4>Trago</h4>
+            <h4>Editar Trago</h4>
             <form>
               <div className="form-group">
-                <label htmlFor="nombre">Nombre</label>
+                <label htmlFor="nombre"><strong>Nombre</strong></label>
                 <input
                   type="text"
                   className="form-control"
@@ -229,7 +229,7 @@ class Trago extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description"><strong>Description</strong></label>
                 <input
                   type="text"
                   className="form-control"
@@ -239,7 +239,7 @@ class Trago extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="ingredientes">Ingredientes</label>
+                <label htmlFor="ingredientes"><strong>Ingredientes</strong></label>
                 <input
                   type="text"
                   className="form-control"
@@ -250,7 +250,7 @@ class Trago extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="preparacion">Preparacion</label>
+                <label htmlFor="preparacion"><strong>Preparacion</strong></label>
                 <input
                   type="text"
                   className="form-control"
@@ -260,20 +260,21 @@ class Trago extends Component {
 
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="disponible">Disponible</label>
+              <div className="form-group" style= {{display:'flex'}}>
+                <label htmlFor="disponible"><strong>Disponible</strong></label>
                 <input
                   type="checkbox"
                   className="form-control"
                   id="disponible"
                   value={currentTrago.disponible}
                   onChange={this.onChangeDisponible}
+                  style= {{height:'20px', width:'20px', marginLeft:'auto'}}
                 />
               </div>
             </form>
 
             <button
-              className="badge badge-danger mr-2"
+              className="btn btn-danger mr-2"
               onClick={this.deleteTrago}
             >
               Borrar
@@ -281,7 +282,7 @@ class Trago extends Component {
 
             <button
               type="submit"
-              className="badge badge-success"
+              className="btn btn-success"
               onClick={this.updateTrago}
             >
               Actualizar

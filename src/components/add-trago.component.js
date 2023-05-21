@@ -102,8 +102,9 @@ export default class AddTrago extends Component {
           </div>
         ) : (
           <div>
+            <h4>Nuevo Trago</h4>
             <div className="form-group">
-              <label htmlFor="nombre">Nombre</label>
+              <label htmlFor="nombre"><strong>Nombre</strong></label>
               <input
                 type="text"
                 className="form-control"
@@ -116,7 +117,7 @@ export default class AddTrago extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Descripcion</label>
+              <label htmlFor="description"><strong>Descripcion</strong></label>
               <input
                 type="text"
                 className="form-control"
@@ -129,7 +130,7 @@ export default class AddTrago extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="ingredientes">Ingredientes</label>
+              <label htmlFor="ingredientes"><strong>Ingredientes</strong></label>
               <input
                 type="text"
                 className="form-control"
@@ -142,7 +143,7 @@ export default class AddTrago extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="preparacion">Preparacion</label>
+              <label htmlFor="preparacion"><strong>Preparacion</strong></label>
               <input
                 type="text"
                 className="form-control"
@@ -154,8 +155,9 @@ export default class AddTrago extends Component {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="disponible">Disponible</label>
+            <div className="form-group" style= {{display:'flex'}}>
+              <label htmlFor="disponible"><strong>Disponible</strong></label>
+              
               <input
                 type="checkbox"
                 className="form-control"
@@ -164,7 +166,8 @@ export default class AddTrago extends Component {
                 value={this.state.disponible}
                 onChange={this.onChangeDisponible}
                 name="disponible"
-              />
+                style= {{height:'20px', width:'20px', marginLeft:'auto'}}
+                />
             </div>
 
             <button onClick={this.saveTrago} className="btn btn-success">

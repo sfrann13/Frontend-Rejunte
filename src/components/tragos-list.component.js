@@ -94,7 +94,8 @@ export default class TragosList extends Component {
 
     return (
       <div className="list row">
-        <div className="col-md-8">
+        <div className="col-md-12">
+          <h3>Tragos</h3>
           <div className="input-group mb-3">
             <input
               type="text"
@@ -105,7 +106,7 @@ export default class TragosList extends Component {
             />
             <div className="input-group-append">
               <button
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-primary"
                 type="button"
                 onClick={this.searchNombre}
               >
@@ -114,8 +115,7 @@ export default class TragosList extends Component {
             </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <h4>Lista de tragos</h4>
+        <div className="col-md-6" style= {{cursor:'pointer'}}>
 
           <ul className="list-group">
             {tragos &&
@@ -146,46 +146,39 @@ export default class TragosList extends Component {
               <h4>Trago</h4>
               <div>
                 <label>
-                  <strong>Nombre:</strong>
-                </label>{" "}
-                {currentTrago.nombre}
+                  <strong>Nombre: </strong> {currentTrago.nombre}
+                </label>
               </div>
               <div>
                 <label>
-                  <strong>Descripcion:</strong>
-                </label>{" "}
-                {currentTrago.description}
+                  <strong>Descripcion: </strong> {currentTrago.description}
+                </label>
               </div>
               <div>
                 <label>
-                  <strong>Ingredientes:</strong>
-                </label>{" "}
-                {currentTrago.ingredientes}
+                  <strong>Ingredientes: </strong> {currentTrago.ingredientes}
+                </label>
               </div>
               <div>
                 <label>
-                  <strong>Preparacion:</strong>
-                </label>{" "}
-                {currentTrago.preparacion}
+                  <strong>Preparacion: </strong> {currentTrago.preparacion}
+                </label>
               </div>
               <div>
                 <label>
-                  <strong>Disponible:</strong>
-                </label>{" "}
-                {currentTrago.disponible ? "Si" : "No"}
+                  <strong>Disponible: </strong> {currentTrago.disponible ? "Si" : "No"}
+                </label>
               </div>
 
-              <Link
-                to={"/trago/" + currentTrago.id}
-                className="badge badge-warning"
-              >
-                Editar
-              </Link>
+              <Link to={"/trago/" + currentTrago.id}>
+              <button className="btn btn-primary">
+              Editar
+              </button>
+              </Link>      
             </div>
           ) : (
             <div>
-              <br />
-              <p>Seleccione un trago para modificar...</p>
+              <p>Seleccione un trago para modificar</p>
             </div>
           )}
         </div>

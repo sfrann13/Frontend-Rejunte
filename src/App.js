@@ -10,15 +10,15 @@ import TragoList from "./components/tragos-list.component";
 class App extends Component {
   render() {
     return (
-      <div style= {{height:'100vh', backgroundColor:'#E0EFEB'}}>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <div style= {{height:'100vh', backgroundColor:'#fff'}}>
+        <nav className="navbar navbar-expand navbar-dark" style= {{backgroundColor:'#02457A'}}>
           <Link to={"/trago"} className="navbar-brand">
             Rejunte
           </Link>
-          <div className="navbar-nav mr-auto">
+          <div className="navbar-nav mr-auto" >
             <li className="nav-item">
               <Link to={"/trago"} className="nav-link">
-                Lista de tragos
+                Tragos
               </Link>
             </li>
             <li className="nav-item">
